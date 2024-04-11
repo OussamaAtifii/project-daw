@@ -3,9 +3,9 @@ import { LoginAuthDto } from './login-auth.dto';
 import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class RegisterAuthDto extends PartialType(LoginAuthDto) {
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(4)
   @MaxLength(25)
+  @MinLength(4)
+  @IsString()
+  @IsNotEmpty()
   name: string;
 }
