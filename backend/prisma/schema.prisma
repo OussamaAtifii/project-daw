@@ -14,10 +14,18 @@ datasource db {
 }
 
 model User {
-  id   String     @id       @default(uuid())
-  email String    @unique
-  name  String
+  id       String     @id @default(uuid())
+  email    String     @unique
+  name     String
   password String
 
   @@map("users")
 }
+
+model Brand {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+
+  @@map("brands")
+}
+
