@@ -74,7 +74,7 @@ export class BrandsService {
     }
 
     try {
-      const updatedBrand = this.prisma.brand.update({
+      const updatedBrand = await this.prisma.brand.update({
         where: { id },
         data: updateBrandDto,
       });
