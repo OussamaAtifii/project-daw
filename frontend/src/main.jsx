@@ -7,6 +7,9 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 
 import './index.css'
+import CategoryPage from './pages/CategoryPage.jsx'
+import { CartProvider } from './context/cart.jsx'
+import CartPage from './pages/CartPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,11 +20,19 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />
+  },
+  {
+    path: '/categories/:categoryId',
+    element: <CategoryPage />
+  },
+  {
+    path: '/cart',
+    element: <CartPage />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <CartProvider>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </CartProvider>
 )
