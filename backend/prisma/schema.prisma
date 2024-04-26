@@ -25,6 +25,7 @@ model User {
 model Brand {
   id       Int       @id @default(autoincrement())
   name     String    @unique
+  products Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -36,6 +37,8 @@ model Category {
   id       Int       @id @default(autoincrement())
   name     String    @unique
   desc     String?
+  image    String?   @default("categories/default.webp")
+  products Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,3 +46,25 @@ model Category {
   @@map("categories")
 }
 
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  shortDesc   String
+  longDesc    String?
+  price       Float
+  image       String?  @default("products/default.webp")
+  stockQty    Int?     @default(0)
+
+  // Relacion 1:N con marca
+  brandId     Int
+  brand       Brand    @relation(fields: [brandId], references: [id])
+
+  // Relacion 1:N con categoria
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("products")
+}
