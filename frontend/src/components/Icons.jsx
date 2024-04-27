@@ -46,11 +46,11 @@ export function RemoveCartIcon () {
   )
 }
 
-export function DeliveryIcon () {
+export function CheckIcon () {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' color='#36cc09' fill='none'>
-      <path d='M3 13.3333C3 13.3333 4.5 14 6.5 17C6.5 17 6.78485 16.5192 7.32133 15.7526M17 6C14.7085 7.14577 12.3119 9.55181 10.3879 11.8223' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
-      <path d='M8 13.3333C8 13.3333 9.5 14 11.5 17C11.5 17 17 8.5 22 6' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='18' height='18' color='#36cc09' fill='none'>
+      <path d='M12 2C16.8706 2 21 6.03298 21 10.9258C21 15.8965 16.8033 19.3847 12.927 21.7567C12.6445 21.9162 12.325 22 12 22C11.675 22 11.3555 21.9162 11.073 21.7567C7.2039 19.3616 3 15.9137 3 10.9258C3 6.03298 7.12944 2 12 2Z' stroke='currentColor' strokeWidth='1.5' />
+      <path d='M8.5 11.8333C8.5 11.8333 9.41602 11.8333 10.291 13.5C10.291 13.5 13.0294 9.33333 15.5 8.5' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   )
 }
@@ -76,6 +76,45 @@ export function ArrowLeftIcon () {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='32' height='32' color='#000000' fill='none'>
       <path d='M15 6C15 6 9.00001 10.4189 9 12C8.99999 13.5812 15 18 15 18' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+    </svg>
+  )
+}
+
+export function FacebookIcon () {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' color='#ffffff' fill='none'>
+      <path d='M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z' stroke='currentColor' strokeWidth='1.5' strokeLinejoin='round' />
+      <path d='M16.9265 8.02637H13.9816C12.9378 8.02637 12.0894 8.86847 12.0817 9.91229L11.9964 21.4268M10.082 14.0017H14.8847' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+    </svg>
+  )
+}
+
+export function TwitterIcon () {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' color='#ffffff' fill='none'>
+      <path d='M2.50012 12C2.50012 7.52166 2.50012 5.28249 3.89136 3.89124C5.28261 2.5 7.52178 2.5 12.0001 2.5C16.4785 2.5 18.7176 2.5 20.1089 3.89124C21.5001 5.28249 21.5001 7.52166 21.5001 12C21.5001 16.4783 21.5001 18.7175 20.1089 20.1088C18.7176 21.5 16.4785 21.5 12.0001 21.5C7.52178 21.5 5.28261 21.5 3.89136 20.1088C2.50012 18.7175 2.50012 16.4783 2.50012 12Z' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M7.00012 17L11.1937 12.8065M17.0001 7L12.8066 11.1935M12.8066 11.1935L9.7779 7H7.00012L11.1937 12.8065M12.8066 11.1935L17.0001 17H14.2223L11.1937 12.8065' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+    </svg>
+  )
+}
+
+export function InstagramIcon () {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' color='#ffffff' fill='none'>
+      <path d='M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z' stroke='currentColor' strokeWidth='1.5' strokeLinejoin='round' />
+      <path d='M16.5 12C16.5 14.4853 14.4853 16.5 12 16.5C9.51472 16.5 7.5 14.4853 7.5 12C7.5 9.51472 9.51472 7.5 12 7.5C14.4853 7.5 16.5 9.51472 16.5 12Z' stroke='currentColor' strokeWidth='1.5' />
+      <path d='M17.5078 6.5L17.4988 6.5' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+    </svg>
+  )
+}
+
+export function DribbbleIcon () {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' color='#ffffff' fill='none'>
+      <circle cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='1.5' />
+      <path d='M22 13.2644C21.0732 13.0906 20.12 13 19.1472 13C13.7948 13 9.03435 15.7425 6 20' stroke='currentColor' strokeWidth='1.5' strokeLinejoin='round' />
+      <path d='M19 5C15.8705 8.66742 11.1679 11 5.90962 11C4.56437 11 3.25548 10.8473 2 10.5587' stroke='currentColor' strokeWidth='1.5' strokeLinejoin='round' />
+      <path d='M14.6178 22C14.8684 20.786 15 19.5287 15 18.2407C15 11.9247 11.8343 6.34645 7 3' stroke='currentColor' strokeWidth='1.5' strokeLinejoin='round' />
     </svg>
   )
 }
