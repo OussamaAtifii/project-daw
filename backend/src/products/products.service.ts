@@ -64,6 +64,21 @@ export class ProductsService {
     }
   }
 
+  findNovelties(productQty: number) {
+    // TODO: Manejar errores y validar parametros
+    const products = this.prisma.product.findMany({
+      include: {
+        category: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: productQty,
+    });
+
+    return products;
+  }
+
   async findByCategory(categoryId: number) {
     const categoryExists = await this.prisma.category.findUnique({
       where: { id: categoryId },

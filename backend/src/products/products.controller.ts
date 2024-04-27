@@ -30,6 +30,11 @@ export class ProductsController {
     return this.productsService.findOne(+id);
   }
 
+  @Get('/novelties/:productQty')
+  findNovelties(@Param('productQty') productQty: string) {
+    return this.productsService.findNovelties(+productQty);
+  }
+
   @Get('category/:id')
   findByCategory(@Param('id') id: string) {
     return this.productsService.findByCategory(+id);
