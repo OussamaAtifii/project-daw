@@ -79,4 +79,8 @@ export class AuthService {
 
     return data;
   }
+
+  async validateToken() {
+    return true;
+  }
 }
