@@ -25,29 +25,12 @@ export class StripeService {
       console.log(totalPrice);
 
       return this.stripe.paymentIntents.create({
-        amount: +totalPrice.toFixed(2) * 100,
+        amount: +(totalPrice * 100).toFixed(2),
         currency: 'eur',
         payment_method_types: ['card'],
       });
     } catch (error) {
       console.log(error);
     }
-
-    // return this.stripe.checkout.sessions.create({
-    //   payment_method_types: ['card'],
-    //   line_items: cart.map((item) => ({
-    //     price_data: {
-    //       currency: 'usd',
-    //       product_data: {
-    //         name: item.name,
-    //       },
-    //       unit_amount: item.price,
-    //     },
-    //     quantity: item.quantity,
-    //   })),
-    //   mode: 'payment',
-    //   success_url: 'https://example.com/success',
-    //   cancel_url: 'https://example.com/cancel',
-    // });
   }
 }
