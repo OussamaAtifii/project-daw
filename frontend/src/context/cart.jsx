@@ -26,6 +26,17 @@ export function CartProvider ({ children }) {
     ]))
   }
 
+  const removePartial = product => {
+    const productIndex = cart.findIndex(item => item.id === product.id)
+
+    if (productIndex >= 0 && cart[productIndex].quantity > 1) {
+      // !TODO change structure clone
+      const newCart = structuredClone(cart)
+      newCart[productIndex].quantity -= 1
+      return setCart(newCart)
+    }
+  }
+
   const clearCart = () => {
     setCart([])
   }
@@ -35,7 +46,7 @@ export function CartProvider ({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, clearCart, removeFromCart, removePartial }}>
       {children}
     </CartContext.Provider>
   )
