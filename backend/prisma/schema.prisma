@@ -18,6 +18,7 @@ model User {
   email    String     @unique
   name     String
   password String
+  orders   Order[]
 
   @@map("users")
 }
@@ -54,6 +55,7 @@ model Product {
   price       Float
   image       String?  @default("products/default.webp")
   stockQty    Int?     @default(0)
+  orders ProductsOnOrders[]
 
   // Relacion 1:N con marca
   brandId     Int
@@ -67,4 +69,25 @@ model Product {
   updatedAt   DateTime @updatedAt
 
   @@map("products")
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  products ProductsOnOrders[]
+
+  createdAt   DateTime @default(now())
+
+  @@map("orders")
+}
+
+model ProductsOnOrders {
+  order Order @relation(fields: [orderId], references: [id])
+  orderId Int
+
+  product Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  @@id([orderId, productId])
 }
