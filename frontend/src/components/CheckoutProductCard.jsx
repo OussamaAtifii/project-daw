@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
+import { useCart } from '../hooks/useCart'
 import { getImageUrl } from '../utils/utils'
-
 import { CheckIcon } from './Icons'
 
 export default function CheckoutProductCard ({ product }) {
+  const { addToCart, removePartial } = useCart()
+
   return (
     <div className='border border-gray-200 rounded-lg overflow-hidden shadow-sm bg-white'>
       <div className='flex items-center p-4'>
@@ -22,15 +25,18 @@ export default function CheckoutProductCard ({ product }) {
         </div>
       </div>
       <div className='flex justify-between items-center px-4 py-2 border-t border-gray-200'>
-        <div className='flex items-center space-x-4'>
-          <span className='text-gray-600'>Cantidad:</span>
-          <div className='flex rounded-md border divide-x-2'>
-            <button className='px-2 py-1 bg-main-50 hover:bg-main-100'>+</button>
-            <p className=' px-2 py-1'>{product.quantity}</p>
-            <button className='px-2 py-1'>-</button>
+        <div>
+          <div className='flex items-center space-x-4'>
+            <span className='text-gray-600'>Cantidad:</span>
+            <div className='flex rounded-md border divide-x-2'>
+              <button className='px-2 py-1 hover:bg-gray-100' onClick={() => removePartial(product)}>-</button>
+              <p className=' px-2 py-1'>{product.quantity}</p>
+              <button className='px-2 py-1 hover:bg-gray-100' onClick={() => addToCart(product)}>+</button>
+            </div>
+            <p className='font-medium'>{product.price.toFixed(2)}€</p>
           </div>
-          <p className='font-medium'>{product.price}€</p>
         </div>
+        <p className='font-medium'>Total: {(product.price * product.quantity).toFixed(2)}€</p>
       </div>
     </div>
   )
