@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { StripeModule } from './stripe/stripe.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { StripeModule } from './stripe/stripe.module';
     CategoriesModule,
     ProductsModule,
     StripeModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
