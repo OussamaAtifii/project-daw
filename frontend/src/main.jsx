@@ -1,15 +1,19 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import HomePage from './pages/HomePage.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
-import LoginPage from './pages/LoginPage.jsx'
-
 import './index.css'
-import CategoryPage from './pages/CategoryPage.jsx'
+
 import { CartProvider } from './context/cart.jsx'
+
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
+import CategoryPage from './pages/CategoryPage.jsx'
 import CartPage from './pages/CartPage.jsx'
+import CheckoutPage from './pages/CheckoutPage.jsx'
+import { Toaster } from 'sonner'
+import { AuthProvider } from './context/AuthContext.jsx'
+import OrdersPage from './pages/OrdersPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,11 +32,22 @@ const router = createBrowserRouter([
   {
     path: '/cart',
     element: <CartPage />
+  },
+  {
+    path: '/checkout',
+    element: <CheckoutPage />
+  },
+  {
+    path: '/orders',
+    element: <OrdersPage />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <CartProvider>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <Toaster richColors />
+      <RouterProvider router={router} />
+    </AuthProvider>
   </CartProvider>
 )
