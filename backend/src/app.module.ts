@@ -11,6 +11,7 @@ import { join } from 'path';
 import { StripeModule } from './stripe/stripe.module';
 import { OrdersModule } from './orders/orders.module';
 import { AddressesModule } from './addresses/addresses.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AddressesModule } from './addresses/addresses.module';
     StripeModule,
     OrdersModule,
     AddressesModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
