@@ -14,11 +14,13 @@ datasource db {
 }
 
 model User {
-  id       String     @id @default(uuid())
+  id       Int     @id @default(autoincrement())
   email    String     @unique
   name     String
   password String
   orders   Order[]
+  address  Address?
+  reviews Review[]
 
   @@map("users")
 }
@@ -55,6 +57,7 @@ model Product {
   price       Float
   image       String?  @default("products/default.webp")
   stockQty    Int?     @default(0)
+  reviews     Review[]
   orders ProductsOnOrders[]
 
   // Relacion 1:N con marca
@@ -74,7 +77,7 @@ model Product {
 model Order {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
-  userId String
+  userId Int
   products ProductsOnOrders[]
 
   createdAt   DateTime @default(now())
@@ -91,3 +94,45 @@ model ProductsOnOrders {
 
   @@id([orderId, productId])
 }
+
+model Address {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+  address String
+  city String
+  name String
+  zip String
+
+  @@map("addresses")
+}
+
+// model Review {
+//   id Int @id @default(autoincrement())
+//   stars Int
+//   review String
+
+//   user User @relation(fields: [userId], references: [id])
+//   userId Int
+
+//   product Product @relation(fields: [productId], references: [id])
+//   productId Int 
+
+//   @@unique([userId, productId])
+
+//   @@map("reviews")
+// }
+
+model Review {
+  id          Int      @id @default(autoincrement())
+  stars       Int
+  review      String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int   // Cambiado a String para que coincida con el tipo de dato de User.id
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   Int      
+
+  @@unique([userId, productId])
+}
+
+

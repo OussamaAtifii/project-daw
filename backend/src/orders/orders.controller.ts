@@ -26,8 +26,8 @@ export class OrdersController {
   }
 
   @Get(':userId')
-  findByUser(@Param('userId') userId: string) {
-    return this.ordersService.findByUser(userId);
+  findByUser(@Param('userId') userId: number) {
+    return this.ordersService.findByUser(+userId);
   }
 
   // @Get(':id')
