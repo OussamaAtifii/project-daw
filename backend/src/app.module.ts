@@ -10,6 +10,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { StripeModule } from './stripe/stripe.module';
 import { OrdersModule } from './orders/orders.module';
+import { AddressesModule } from './addresses/addresses.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { OrdersModule } from './orders/orders.module';
     ProductsModule,
     StripeModule,
     OrdersModule,
+    AddressesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
