@@ -26,6 +26,10 @@ export function CartProvider ({ children }) {
     ]))
   }
 
+  const checkProductInCart = (product) => {
+    return cart.some((item) => item.id === product.id)
+  }
+
   const removePartial = product => {
     const productIndex = cart.findIndex(item => item.id === product.id)
 
@@ -46,7 +50,7 @@ export function CartProvider ({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart, removeFromCart, removePartial }}>
+    <CartContext.Provider value={{ cart, addToCart, clearCart, removeFromCart, removePartial, checkProductInCart }}>
       {children}
     </CartContext.Provider>
   )
