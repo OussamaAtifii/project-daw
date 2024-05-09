@@ -35,13 +35,12 @@ export function AddCartIcon () {
 export function RemoveCartIcon () {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' color='#000000' fill='none'>
-      <path d='M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
-      <path d='M6 6H8M22 6H18.5' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
+      <path d='M8 16H15.2632C19.7508 16 20.4333 13.1808 21.261 9.06908C21.4998 7.88311 21.6192 7.29013 21.3321 6.89507C21.045 6.5 20.4947 6.5 19.3941 6.5H19M6 6.5H8' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
       <path d='M10.5 3L13.5 6M13.5 6L16.5 9M13.5 6L10.5 9M13.5 6L16.5 3' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
-      <circle cx='6' cy='20' r='2' stroke='currentColor' strokeWidth='1.5' />
-      <circle cx='17' cy='20' r='2' stroke='currentColor' strokeWidth='1.5' />
-      <path d='M8 20L15 20' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
-      <path d='M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
+      <path d='M8 16L5.37873 3.51493C5.15615 2.62459 4.35618 2 3.43845 2H2.5' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
+      <path d='M8.88 16H8.46857C7.10522 16 6 17.1513 6 18.5714C6 18.8081 6.1842 19 6.41143 19H17.5' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+      <circle cx='10.5' cy='20.5' r='1.5' stroke='currentColor' strokeWidth='1.5' />
+      <circle cx='17.5' cy='20.5' r='1.5' stroke='currentColor' strokeWidth='1.5' />
     </svg>
   )
 }
@@ -64,9 +63,9 @@ export function UserIcon () {
   )
 }
 
-export function ArrowRightIcon () {
+export function ArrowRightIcon ({ w = 32, h = 32 }) {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='32' height='32' color='#000000' fill='none'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width={w} height={h} color='#000000' fill='none'>
       <path d='M9.00005 6C9.00005 6 15 10.4189 15 12C15 13.5812 9 18 9 18' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   )
@@ -134,6 +133,14 @@ export function SpinnerIcon () {
     <svg aria-hidden='true' className='inline w-6 h-6 text-gray-400 animate-spin fill-white' viewBox='0 0 100 101' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z' fill='currentColor' />
       <path d='M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z' fill='currentFill' />
+    </svg>
+  )
+}
+
+export function ArrowDownIcon () {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20' color='#000000' fill='none'>
+      <path d='M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
     </svg>
   )
 }
