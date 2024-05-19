@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStripeDto } from './dto/create-stripe.dto';
-import { UpdateStripeDto } from './dto/update-stripe.dto';
 
 import Stripe from 'stripe';
 
@@ -27,7 +26,7 @@ export class StripeService {
       return this.stripe.paymentIntents.create({
         amount: +(totalPrice * 100).toFixed(2),
         currency: 'eur',
-        payment_method_types: ['card'],
+        automatic_payment_methods: { enabled: true },
       });
     } catch (error) {
       console.log(error);
