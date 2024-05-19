@@ -1,4 +1,4 @@
-import { FacebookIcon, TwitterIcon, InstagramIcon, DribbbleIcon, HomeIcon, EmailIcon, PhoneIcon, ArrowRightIcon } from './Icons'
+import { FacebookIcon, TwitterIcon, InstagramIcon, DribbbleIcon, EmailIcon, PhoneIcon, ArrowRightIcon, OfficeIcon } from './Icons'
 import SocialIcon from './SocialIcon'
 
 export default function Footer () {
@@ -27,7 +27,7 @@ export default function Footer () {
           <div className='text-center lg:text-left'>
             <h4 className='text-lg font-bold mb-3'>Contacto</h4>
             <ul className='text-sm space-y-2 flex flex-col items-center lg:items-start'>
-              <li className='flex items-center lg:justify-start gap-1'><HomeIcon color='#fff' /><ArrowRightIcon size={18} color='#fff' /><a href='#' className='hover:text-blue-300'>Gran Vía, 1, Madrid, España</a></li>
+              <li className='flex items-center lg:justify-start gap-1'><OfficeIcon color='#fff' /><ArrowRightIcon size={18} color='#fff' /><a href='#' className='hover:text-blue-300'>Gran Vía, 1, Madrid, España</a></li>
               <li className='flex items-center lg:justify-start gap-1'><EmailIcon /><ArrowRightIcon size={18} color='#fff' /> <a href='#' className='hover:text-blue-300'> info@tecnonexo.com</a></li>
               <li className='flex items-center lg:justify-start gap-1'><PhoneIcon /><ArrowRightIcon size={18} color='#fff' /><a href='#' className='hover:text-blue-300'>+34 612 34 56 78</a></li>
             </ul>
