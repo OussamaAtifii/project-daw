@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import Navbar from '../components/Navbar'
 import { getBrand, getBrandProducts, getCategories } from '../services/api'
+import Breadcrumbs from '../components/Breadcrumbs'
+import ProductGrid from '../components/ProductGrid'
+import { FilterIcon, RemoveCartIcon } from '../components/Icons'
+import Filters from '../components/Filters'
+import FiltersResponsive from '../components/FiltersResponsive'
 
 export default function BrandPage () {
   const { brandId } = useParams()
@@ -54,9 +59,9 @@ export default function BrandPage () {
   }
 
   const handleChangeCategory = (e) => {
+    console.log(e.target.value)
     const categoryId = +e.target.value
 
-    // Actualizar el estado de los filtros
     setFilters((prevFilters) => ({
       // Mantener las otras propiedades de los filtros intactas
       ...prevFilters,
@@ -67,7 +72,6 @@ export default function BrandPage () {
       // Si no está presente, agregarla al array utilizando spread operator
         : [...prevFilters.categories, categoryId]
     }))
-    console.log(filters)
   }
 
   const filteredProducts = products.filter((product) => {
@@ -86,7 +90,67 @@ export default function BrandPage () {
   return (
     <>
       <Navbar />
-      <div className='max-w-screen-xl mx-auto'>
+      <Breadcrumbs name={brand ? brand.name : ''} />
+      {products.length > 0
+        ? (
+          <>
+            <FiltersResponsive
+              filters={filters}
+              onChangeMinPrice={handleChangeMinPrice}
+              onChangeCategory={handleChangeCategory}
+              categories={categories}
+            />
+            <div className='max-w-screen-xl mx-auto'>
+              <>
+                <div className='mx-2 xl:mx-0'>
+                  <h1 className='font-bold text-3xl'>{brand.name}</h1>
+                  <p className='mb-9 text-sm'>
+                    Aquí irá la descripción de la marca
+                  </p>
+                </div>
+                <div className='flex gap-20'>
+                  <div className='divide-y-2 w-[300px] hidden md:block ml-2 xl:ml-0'>
+                    <Filters
+                      filters={filters}
+                      onChangeMinPrice={handleChangeMinPrice}
+                      onChangeCategory={handleChangeCategory}
+                      categories={categories}
+                    />
+                  </div>
+                  {filteredProducts.length > 0
+                    ? (
+                      <ProductGrid products={filteredProducts} />
+                      )
+                    : (
+                      <div className='flex flex-col items-center text-center gap-4 w-full'>
+                        <div className='bg-main-200 rounded-full p-4'>
+                          <FilterIcon />
+                        </div>
+                        <p className='text-lg font-medium'>
+                          No disponemos de productos con los filtros seleccionados.
+                        </p>
+                      </div>
+                      )}
+                </div>
+              </>
+            </div>
+          </>
+          )
+        : (
+          <div className='flex flex-col items-center text-center gap-4'>
+            <div className='bg-main-200 rounded-full p-4'>
+              <RemoveCartIcon />
+            </div>
+            <p>
+              No disponemos de productos en la categoria{' '}
+              <span className='font-semibold'>{brand.name}</span>
+              <Link to='/' className='text-main-600 italic hover:underline'>
+                <p>¡Explora otros productos!</p>
+              </Link>
+            </p>
+          </div>
+          )}
+      {/* <div className='max-w-screen-xl mx-auto'>
         <h1 className='font-bold text-3xl'>{brand.name}</h1>
         <p className='mb-9 text-sm'>Aquí irá la descripción de la marca</p>
         <div className='flex gap-20'>
@@ -130,15 +194,9 @@ export default function BrandPage () {
               ))}
             </div>
           </div>
-          <div className='grid grid-cols-4 gap-x-10 gap-y-16'>
-            {filteredProducts.map((product) => (
-              <div key={product.id}>
-                <ProductCard product={product} />
-              </div>
-            ))}
-          </div>
+          <ProductGrid products={filteredProducts} />
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
