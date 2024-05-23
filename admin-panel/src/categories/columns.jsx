@@ -7,8 +7,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+
 import { formatDate } from '@/utils/utils'
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
+import { ArrowUpDown, Delete, MoreHorizontal, SquarePen } from 'lucide-react'
 
 export const columns = [
   {
@@ -31,16 +32,21 @@ export const columns = [
   },
   {
     accessorKey: 'desc',
-    header: 'Descripción'
+    header: 'Descripción',
+    cell: ({ row }) => {
+      return (
+        <div className='truncate w-[600px] max-w-[600px]'>
+          {row.original.desc}
+        </div>
+      )
+    }
   },
   {
     accessorKey: 'createdAt',
     header: 'Fecha de creación',
     cell: ({ row }) => {
       const date = row.original.createdAt
-      return (
-        formatDate(date)
-      )
+      return formatDate(date)
     }
   },
   {
@@ -57,17 +63,16 @@ export const columns = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Eliminar
-            </DropdownMenuItem>
+            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
+              className='flex gap-2 justify-between'
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Modificar
+              Eliminar <Delete size={16} />
+            </DropdownMenuItem>
+            <DropdownMenuItem className='flex gap-2 justify-between'>
+              Modificar <SquarePen size={16} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
