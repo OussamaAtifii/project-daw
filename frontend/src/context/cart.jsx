@@ -5,7 +5,7 @@ export const CartContext = createContext()
 
 // Crear provider
 export function CartProvider ({ children }) {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
 
   const addToCart = product => {
     const productIndex = cart.findIndex(item => item.id === product.id)
@@ -14,16 +14,20 @@ export function CartProvider ({ children }) {
       // !TODO change structure clone
       const newCart = structuredClone(cart)
       newCart[productIndex].quantity += 1
-      return setCart(newCart)
+      setCart(newCart)
+      localStorage.setItem('cart', JSON.stringify(newCart))
+      return
     }
 
-    setCart(prevState => ([
-      ...prevState,
-      {
+    const newCart = [
+      ...cart, {
         ...product,
         quantity: 1
       }
-    ]))
+    ]
+
+    setCart(newCart)
+    localStorage.setItem('cart', JSON.stringify(newCart))
   }
 
   const checkProductInCart = (product) => {
@@ -37,16 +41,20 @@ export function CartProvider ({ children }) {
       // !TODO change structure clone
       const newCart = structuredClone(cart)
       newCart[productIndex].quantity -= 1
-      return setCart(newCart)
+      setCart(newCart)
+      localStorage.setItem('cart', JSON.stringify(newCart))
     }
   }
 
   const clearCart = () => {
     setCart([])
+    localStorage.setItem('cart', JSON.stringify([]))
   }
 
   const removeFromCart = (product) => {
-    setCart(prevState => prevState.filter(item => item.id !== product.id))
+    const newCart = cart.filter(item => item.id !== product.id)
+    setCart(newCart)
+    localStorage.setItem('cart', JSON.stringify(newCart))
   }
 
   return (
