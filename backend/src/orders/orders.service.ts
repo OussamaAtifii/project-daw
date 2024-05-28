@@ -7,7 +7,7 @@ export class OrdersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createOrderDto: CreateOrderDto) {
-    console.log(createOrderDto);
+    console.log('eto es el total', createOrderDto.total);
 
     const productIds = createOrderDto.cart.map((product) => ({
       product: { connect: { id: product.id } },
@@ -19,6 +19,7 @@ export class OrdersService {
         products: {
           create: productIds,
         },
+        total: createOrderDto.total,
       },
     });
 
@@ -33,6 +34,30 @@ export class OrdersService {
     });
 
     return ordersWithProducts;
+  }
+
+  async getCount() {
+    const count = await this.prisma.order.count();
+    return count;
+  }
+
+  async getRecent() {
+    const orders = await this.prisma.order.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+      },
+      take: 5,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return orders;
   }
 
   async findByUser(userId: number) {
