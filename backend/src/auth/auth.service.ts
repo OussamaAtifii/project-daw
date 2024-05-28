@@ -3,13 +3,11 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
-  NotFoundException,
 } from '@nestjs/common';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma.service';
-import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -19,7 +17,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(credentials: RegisterAuthDto): Promise<User> {
+  async register(credentials: RegisterAuthDto) {
     const { password, name, email } = credentials;
 
     const user = await this.prisma.user.findUnique({
@@ -29,7 +27,7 @@ export class AuthService {
     });
 
     if (user) {
-      throw new BadRequestException('User already exists');
+      throw new BadRequestException('El correo electrónico ya está en uso');
     }
 
     try {
@@ -43,7 +41,21 @@ export class AuthService {
         },
       });
 
-      return createdUser;
+      const payload = {
+        id: createdUser.id,
+        email: createdUser.email,
+      };
+
+      const token = this.jwtService.sign(payload);
+
+      const userData = {
+        userId: createdUser.id,
+        name: createdUser.name,
+        email: createdUser.email,
+        token,
+      };
+
+      return userData;
     } catch (error) {
       throw new InternalServerErrorException('Failed to register user');
     }
@@ -74,13 +86,37 @@ export class AuthService {
 
     const data = {
       userId: user.id,
+      name: user.name,
+      email: user.email,
       token,
     };
 
     return data;
   }
 
-  async validateToken() {
-    return true;
+  async validateToken(userInfo: any) {
+    try {
+      const { token, id } = userInfo;
+      console.log(token, id);
+
+      if (!id || !token) {
+        throw new ForbiddenException('Token o usuario invalidos');
+      }
+
+      const payload = this.jwtService.verify(token);
+
+      if (payload.id !== id) {
+        throw new ForbiddenException('Token o usuario invalidos');
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getCount() {
+    const count = this.prisma.user.count();
+    return count;
   }
 }

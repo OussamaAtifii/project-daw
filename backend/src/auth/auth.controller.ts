@@ -19,8 +19,14 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('validate')
-  validateToken() {
-    return this.authService.validateToken();
+  @Post('validate')
+  // TODO: Add the correct type for the token and user parameters
+  validateToken(@Body() userInfo: any) {
+    return this.authService.validateToken(userInfo);
+  }
+
+  @Get('count')
+  getCount() {
+    return this.authService.getCount();
   }
 }
