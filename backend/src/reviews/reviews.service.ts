@@ -32,6 +32,11 @@ export class ReviewsService {
     return `This action returns all reviews`;
   }
 
+  getCount() {
+    const count = this.prisma.review.count();
+    return count;
+  }
+
   async findByProduct(productId: number) {
     const reviews = await this.prisma.review.findMany({
       where: {
@@ -44,6 +49,9 @@ export class ReviewsService {
           },
         },
       },
+      orderBy: {
+        id: 'desc',
+      },
     });
 
     return reviews;
@@ -51,9 +59,5 @@ export class ReviewsService {
 
   update(id: number, updateReviewDto: UpdateReviewDto) {
     return `This action updates a #${id} review`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} review`;
   }
 }
