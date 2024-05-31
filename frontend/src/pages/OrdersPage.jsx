@@ -7,22 +7,29 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import { CreditCardNotAccept } from '../components/Icons'
 
 function OrderPage () {
-  const { user, logout } = useAuth()
+  const { user, logout, validateUser } = useAuth()
   const navigate = useNavigate()
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
-    if (!user) {
-      logout()
-      return navigate('/login')
+    const getUserOrders = async () => {
+      const isValid = await validateUser()
+
+      if (!isValid) {
+        logout()
+        navigate('/login')
+        return
+      }
+
+      fetch(`http://localhost:3000/orders/${user.userId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          setOrders(data)
+        })
     }
 
-    fetch(`http://localhost:3000/orders/${user.userId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setOrders(data)
-      })
+    getUserOrders()
   }, [])
 
   const orderLatest = () => {
@@ -40,7 +47,7 @@ function OrderPage () {
   }
 
   const orderPrice = () => {
-    const sortedOrders = [...orders].sort((a, b) => b.price - a.price)
+    const sortedOrders = [...orders].sort((a, b) => b.total - a.total)
     setOrders(sortedOrders)
   }
 
@@ -48,49 +55,49 @@ function OrderPage () {
     <>
       <Navbar />
       <Breadcrumbs />
-      <div className='max-w-screen-xl mx-auto'>
+      <div className='max-w-screen-xl mx-auto px-2 2xl:px-0'>
         {orders.length > 0
           ? (
             <>
               <h1 className='text-3xl font-semibold'>Historial de Pedidos</h1>
-              <p className='text-gray-600 mb-10'>
+              <p className='text-gray-600 mb-10 hidden sm:block'>
                 Aquí podrás ver todos tus pedidos realizados en la tienda.
               </p>
-              <p>Filtrar por:</p>
-              <div className='grid grid-cols-4 justify-between gap-10 mb-10'>
+              <div className='flex flex-wrap justify-between gap-4 mb-10'>
                 <button
-                  className='hover:bg-gray-100 p-4 rounded-md border-2'
+                  className='flex-1 min-w-[150px] hover:bg-gray-100 p-4 rounded-md border-2'
                   onClick={orderLatest}
                 >
                   Mas recientes
                 </button>
                 <button
-                  className='hover:bg-gray-100 p-4 rounded-md border-2'
+                  className='flex-1 min-w-[150px] hover:bg-gray-100 p-4 rounded-md border-2'
                   onClick={orderOldest}
                 >
                   Mas antiguos
                 </button>
                 <button
-                  className='hover:bg-gray-100 p-4 rounded-md border-2'
+                  className='flex-1 min-w-[150px] hover:bg-gray-100 p-4 rounded-md border-2'
                   onClick={orderPrice}
                 >
                   Precio
                 </button>
-                <button className='hover:bg-gray-100 p-4 rounded-md border-2'>
+                <button className='flex-1 min-w-[150px] hover:bg-gray-100 p-4 rounded-md border-2'>
                   Mas recientes
                 </button>
               </div>
+              <hr className='border-gray-300 mb-10' />
               <div
                 className='grid gap-6 mx-auto'
                 style={{
                   gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))'
                 }}
               >
-                {orders.map((order, index) => (
+                {orders.map((order) => (
                   <div key={order.id} className='border rounded-lg p-4 shadow-md'>
                     <div className='flex justify-between mb-2'>
                       <h2 className='text-lg font-semibold'>
-                        Pedido #{index + 1}
+                        Pedido #{order.id}
                       </h2>
                       <p className='text-gray-500'>
                         {formatDate(order.createdAt)}
@@ -100,7 +107,9 @@ function OrderPage () {
                       <p className='text-gray-500'>
                         Cantidad de productos: {order.products.length}
                       </p>
-                      <p className='text-gray-500'>Total: ${order.total}</p>
+                      <p className='text-gray-500'>
+                        Total: {order.total.toFixed(2)}€
+                      </p>
                     </div>
                   </div>
                 ))}
