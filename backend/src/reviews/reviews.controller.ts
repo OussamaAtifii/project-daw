@@ -25,6 +25,11 @@ export class ReviewsController {
     return this.reviewsService.findAll();
   }
 
+  @Get('count')
+  getCount() {
+    return this.reviewsService.getCount();
+  }
+
   @Get(':productId')
   findByProduct(@Param('productId') productId: string) {
     return this.reviewsService.findByProduct(+productId);
@@ -33,10 +38,5 @@ export class ReviewsController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {
     return this.reviewsService.update(+id, updateReviewDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reviewsService.remove(+id);
   }
 }
